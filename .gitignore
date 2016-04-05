@@ -7,3 +7,5 @@ plugins/
 config/*
 !config/sample.json
 www/js/constants.js
+/nbproject/private/
+/Teaching-HEIGVD-CM_APPMOB-2016-CitizenEngagement/nbproject/private/
