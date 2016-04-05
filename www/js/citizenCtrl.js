@@ -1,21 +1,23 @@
 angular.module('citizen-engagement.citizenCtrl', [])
 
-        .controller('UserListCtrl',
+        .controller('IssueTypesListCtrl',
                 function ($scope, $http, apiUrl) {
-                    $scope.loadUsers = function () {
+                    $scope.loadIssueTypes = function () {
                         $http.get(apiUrl + '/issueTypes').success(function (issueTypes) {
-                            $scope.user = issueTypes;
-                            //console.log(issueTypes[0].name);
+                            $scope.issueTypes = issueTypes;
+                            console.log(issueTypes);
 
                             index = 0;
 
                             while (index < issueTypes.length)
                             {
                                 console.log(issueTypes[index].name);
+                                $scope.currentIssueType = issueTypes[index].name;
                                 index++;
                             }
 
                         });
                     };
+                    $scope.loadIssueTypes();
 
                 });

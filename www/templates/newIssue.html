@@ -3,10 +3,27 @@
         <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
     </ion-nav-buttons>
     <ion-content>
-        <p>Hello! This is the issue creation screen.</p>
 
+        <!-- Map à injecter ici -->
+        <img src="img/banner.jpg" width="100%" alt="Citizen Engagement" />
+
+
+
+
+        <div id='newIssueContainer' ng-controller="IssueTypesListCtrl">
+            <!--<button type="button" ng-click="loadIssueTypes()" class="button">Yunia</button>-->
+            <p>What kind of issue are your facing?</p>
+            <!--Issue type form-->
+            <select>
+                <option selected disabled>Choose here</option>
+                <option ng-repeat='issueType in issueTypes' value="{{issueType.id}}">{{issueType.name}}</option>
+            </select>
+
+            <form>
+                Description<br>
+                <input type="text" name="description"><br>
+            </form>
+
+        </div>
     </ion-content>
-    <ion-nav-buttons>
-        <button type="button" ng-controller="UserListCtrl" ng-click="loadUsers()" class="button">Yunia</button>
-    </ion-nav-buttons>
 </ion-view>
