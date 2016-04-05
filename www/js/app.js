@@ -71,6 +71,15 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
 
+    .state('tab.callAuthorities', {
+      url: '/callAuthorities',
+      views: {
+        'tab-callAuthorities': {
+          templateUrl: 'templates/callAuthorities.html'
+        }
+      }
+    })
+
     // This is the issue details state.
     .state('tab.issueDetails', {
       // We use a parameterized route for this state.
