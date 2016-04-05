@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/api-proxy",
-      "proxyUrl": "https://pure-gorge-1661.herokuapp.com/api"
+      "proxyUrl": "https://heigvd-cm-appmob-2016-team-02.herokuapp.com/api"
     }
   ]
 }
