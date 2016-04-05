@@ -31,6 +31,7 @@
         // If successful, give the user to the authentication service.
         AuthService.setUser(user);
         
+        //Test
         $scope.users = user;
         console.log(user.userId);
         
