@@ -49,7 +49,11 @@ angular.module('citizen-engagement.auth', ['angular-storage'])
 
         // If successful, give the user to the authentication service.
         AuthService.setUser(user);
-
+        
+        //test affichage id user
+        $scope.users = user;
+        console.log(user.userId);
+        
         // Hide the loading message.
         $ionicLoading.hide();
 

@@ -1,40 +1,57 @@
-// Ionic Starter App
+  angular.module('citizen-engagement.auth', ['angular-storage'])
+  
+  .controller('LoginCtrl', function(apiUrl, AuthService, $http, $ionicHistory, $ionicLoading, $scope, $state) {
 
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants'])
-
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
-
-.config(function($stateProvider, $urlRouterProvider) {
-
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-    .state('issueTypes', {
-      url: '/issueTypes',
-      controller: 'IssueTypesCtrl',
-      templateUrl: 'templates/newIssue.html'
+    // The $ionicView.beforeEnter event happens every time the screen is displayed.
+    $scope.$on('$ionicView.beforeEnter', function() {
+      // Re-initialize the user object every time the screen is displayed.
+      // The first name and last name will be automatically filled from the form thanks to AngularJS's two-way binding.
+      $scope.user = {};
     });
 
-});
+    // Add the register function to the scope.
+    $scope.register = function() {
+
+      // Forget the previous error (if any).
+      delete $scope.error;
+
+      // Show a loading message if the request takes too long.
+      $ionicLoading.show({
+        template: 'Logging in...',
+        delay: 750
+      });
+
+      // Make the request to retrieve or create the user.
+      $http({
+        method: 'POST',
+        url: apiUrl + '/users/logister',
+        data: $scope.user
+      }).success(function(user) {
+
+        // If successful, give the user to the authentication service.
+        AuthService.setUser(user);
+        
+        $scope.users = user;
+        console.log(user.userId);
+        
+        // Hide the loading message.
+        $ionicLoading.hide();
+
+        // Set the next view as the root of the history.
+        // Otherwise, the next screen will have a "back" arrow pointing back to the login screen.
+        $ionicHistory.nextViewOptions({
+          disableBack: true,
+          historyRoot: true
+        });
+
+        // Go to the issue creation tab.
+        $state.go('tab.newIssue');
+
+      }).error(function() {
+
+        // If an error occurs, hide the loading message and show an error message.
+        $ionicLoading.hide();
+        $scope.error = 'Could not log in.';
+      });
+    };
+  });
