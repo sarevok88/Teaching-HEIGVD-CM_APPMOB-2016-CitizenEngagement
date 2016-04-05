@@ -1,10 +1,24 @@
 <ion-view view-title="New Issue">
-  <ion-nav-buttons side="secondary">
-    <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
-  </ion-nav-buttons>
-  <ion-content>
-    <!-- A banner. Choose an image and save it as www/img/banner.jpg -->
-    <img src="img/banner.jpg" width="100%" alt="Citizen Engagement" />
-    <p>Hello! This is the issue creation screen.</p>
-  </ion-content>
+    <ion-nav-buttons side="secondary">
+        <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <!-- Une map de google intégrant la géoloc avec possibilité -->
+        <img src="img/banner.jpg" width="100%" alt="Citizen Engagement" />
+
+        <!-- Formulaire de définition du type d'issue -->
+        <form method="post" action="traitement.php">
+            <p>
+                <label for="pays">What kind of issue are you facing ?</label><br />
+                <select name="issueType" id="issueType">
+                    <option selected disabled>Choose here</option>
+                    <option value="france">Broken street light</option>
+                    <option value="espagne">Graffiti</option>
+                    <option value="italie">Etc</option>
+                </select>
+            </p>
+        </form>
+
+        <p>Hello! This is the issue creation screen.</p>
+    </ion-content>
 </ion-view>
