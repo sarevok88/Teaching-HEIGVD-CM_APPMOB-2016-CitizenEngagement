@@ -1,4 +1,4 @@
-angular.module("citizen-engagement.issuesMap", ['angular-storage'])
+angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-directive','geolocation'])
 
 .controller("issuesMapController", function($log, $scope, geolocation, mapboxMapId, mapboxAccessToken, AuthService) {
 	
