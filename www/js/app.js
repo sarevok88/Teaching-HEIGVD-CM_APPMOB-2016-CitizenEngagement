@@ -99,19 +99,6 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       }
     })
     
-   // This is the issue details state.
-          .state('menu.issueDetails', {
-            // We use a parameterized route for this state.
-            // That way we'll know which issue to display the details of.
-            url: '/issueDetails/:issueId',
-            views: {
-              // Here we use the same "tab-issueList" view as the previous state.
-              // This means that the issue details template will be displayed in the same tab as the issue list.
-              'menuContent': {
-                templateUrl: 'templates/issueDetails.html'
-              }
-            }
-          })
 
     .state('login', {
       url: '/login',

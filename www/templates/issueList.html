@@ -6,7 +6,7 @@
         <form action="">
             <div id='issuesListContainer' ng-controller="issuesListController">
 
-                <div class='issueListBlock card' ng-repeat='issue in issues' value="{{issue.id}}">
+                <div class='issueListBlock card' ng-repeat='issue in issues' value="{{issue.id}}" ui-sref="menu.issueDetails({issueId:issue.id})">
                     <!--option générée sur la base de l'API-->
                     <img class='issueListBlockImg' src="{{issue.imageUrl}}" alt="issue Photo" height="150" width="150">
                     <div class='issueListBlockInfo'>
