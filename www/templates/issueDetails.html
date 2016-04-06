@@ -2,5 +2,10 @@
     <ion-content>
         <div ng-controller='issueDetailsController'></div>
         <div id="map"></div>
+                            <div class='issueListBlockInfo'>
+                    <h3>{{issue.issueType.name}}</h3>
+                    <p>{{issue.issueType.description}}</p>
+                    <p>{{issue.state}}</p>
+                    </div>
     </ion-content>
 </ion-view>
