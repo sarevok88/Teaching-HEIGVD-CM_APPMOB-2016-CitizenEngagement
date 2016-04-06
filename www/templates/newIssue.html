@@ -4,26 +4,39 @@
     </ion-nav-buttons>
     <ion-content>
 
-        <!-- Map à injecter ici -->
+
+        <!-- Map à injecter ici avec une geoloc auto modifiable -->
         <img src="img/banner.jpg" width="100%" alt="Citizen Engagement" />
 
+        <!--formulaire transmettant les data à l'api-->
+        <form action="">
+            <div id='newIssueContainer' ng-controller="IssueTypesListCtrl">
+                
+                <!--bouton appelant de la datat (démo)//////////////////////////////////////////////////////////////////////////////////-->
+                <!--<button type="button" ng-click="loadIssueTypes()" class="button">Yunia</button>-->
+                <!--bouton appelant de la datat (démo)//////////////////////////////////////////////////////////////////////////////////-->
+                
+                <!--Choix du type de l'issue-->
+                <p>What kind of issue are your facing?</p>
+                <!--Issue type form-->
+                <select>
+                    <!--default value-->
+                    <option selected disabled>Choose here</option>
+                    <!--option générée sur la base de l'API-->
+                    <option ng-repeat='issueType in issueTypes' value="{{issueType.id}}">{{issueType.name}}</option>
+                </select><br>
 
-
-
-        <div id='newIssueContainer' ng-controller="IssueTypesListCtrl">
-            <!--<button type="button" ng-click="loadIssueTypes()" class="button">Yunia</button>-->
-            <p>What kind of issue are your facing?</p>
-            <!--Issue type form-->
-            <select>
-                <option selected disabled>Choose here</option>
-                <option ng-repeat='issueType in issueTypes' value="{{issueType.id}}">{{issueType.name}}</option>
-            </select>
-
-            <form>
+                <!--description de l'issue-->
                 Description<br>
                 <input type="text" name="description"><br>
-            </form>
+                
+                <!---->
+                <br>
+                <input type="submit" value="Submit">
 
-        </div>
+
+
+            </div>
+        </form> 
     </ion-content>
 </ion-view>
