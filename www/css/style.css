@@ -28,3 +28,14 @@ input[type=submit]:hover {
   margin: 0 auto;
   text-align: center;
 }
+
+img.issueListBlockImg {
+    margin-right: 15px;
+    float: left;
+}
+
+.issueListBlock {
+    width: 100%;
+    padding: 20px;
+    overflow: hidden;
+}
