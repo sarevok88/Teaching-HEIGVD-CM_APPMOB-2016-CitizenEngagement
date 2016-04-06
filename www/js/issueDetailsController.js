@@ -7,12 +7,26 @@ angular.module('citizen-engagement.issueDetails', [])
         $scope.loadCurrentIssue=function(){
             $http.get(apiUrl+'/issues/'+currentId).success(function(issueCurrent){
                 $scope.issueCurrent=issueCurrent;
+                /*
+                console.log(issueCurrent.issueType.name);
+                console.log(issueCurrent.issueType.description);
+                console.log("by " +issueCurrent.owner.name);
+                console.log("State " +issueCurrent.state);
+                console.log(issueCurrent.comments);
+                */
+                index = 0;
+		
+                    while (index < issueCurrent.comments.length)
+			{
+			    console.log("yolo");
+			    index++;
+			}
+                
+                
+                
 
-                console.log('issueDetailsController CONNECTE');
-                console.log(issueCurrent);
-
-            })
-        }
+            });
+        };
 
         $scope.loadCurrentIssue();
     }
