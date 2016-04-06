@@ -1,7 +1,7 @@
 <ion-view view-title="Issue Map">
   <ion-content scroll=false>
-  
-   <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
-
+	<div ng-if="mapEnabled" style="height: 100%">
+		<leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
+	</div>
   </ion-content>
 </ion-view>
