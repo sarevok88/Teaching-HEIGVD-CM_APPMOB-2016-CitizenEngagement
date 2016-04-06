@@ -8,9 +8,11 @@ angular.module('citizen-engagement.issuesList', [])
 
 			index = 0;
 
-			while (index < issue.length)
+			while (index < issues.length)
 			{
-			    console.log(issue[index].name);
+			    console.log(issues[index].issueType.name);
+                            console.log(issues[index].issueType.description);
+                            console.log(issues[index].state);
 			    $scope.currentIssue = issue[index].name;
 			    index++;
 			}
