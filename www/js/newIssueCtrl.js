@@ -15,7 +15,11 @@ angular.module('citizen-engagement.newIssueCtrl', [])
                                 $scope.currentIssueType = issueTypes[index].name;
                                 index++;
                             }
-
+                            
+                            console.log("test injection map");
+                            
+                            
+                            console.log("Fin code test injection map");
                         });
                     };
                     $scope.loadIssueTypes();
