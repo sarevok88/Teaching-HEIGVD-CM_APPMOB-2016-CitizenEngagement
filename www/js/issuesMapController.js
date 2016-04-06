@@ -9,22 +9,28 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 	  $scope.userCoords = {};
 	  $scope.data = {};
 	  $scope.radius = {};
+	  $scope.mapEnabled = false;
    
 	//recupération de la localisation de l'utilisateur 
 	geolocation.getLocation().then(function(data) {
 		
-		console.log(data.coords);
-		
 		$scope.mapCenter.lat = data.coords.latitude;
 		$scope.mapCenter.lng = data.coords.longitude;
 		$scope.mapCenter.zoom = 14;
+		$scope.mapEnabled = true;
 		
 		var mapboxTileLayer = "http://api.tiles.mapbox.com/v4/" + mapboxMapId;
 		
 		mapboxTileLayer = mapboxTileLayer + "/{z}/{x}/{y}.png?access_token=" + mapboxAccessToken;
 		
 		$scope.mapDefaults = {
-			tileLayer: mapboxTileLayer
+			tileLayer: mapboxTileLayer,
+			 events: {
+				map: {
+					enable: ['zoomend', 'drag', 'click'],
+					
+            }
+        }
 		};
 
 		//ajout du pin du user
@@ -46,8 +52,7 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 			var y0 = $scope.mapCenter.lng;
 			
 			//on a besoin du rayon de la sphère en radian (d'après mongoDB $centerSphere)
-			$scope.radius = (Math.sqrt((((x1-x0)^2)+((y1-y0)^2))))/6371;
-			
+			$scope.radius = mapBounds._northEast.distanceTo($scope.mapCenter)/6135; 
 		}
 		
 		function createData4POST()
@@ -57,34 +62,57 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 					"$geoWithin": {
 						"$centerSphere" : [
 							[ $scope.mapCenter.lat , $scope.mapCenter.lng ],
-								$scope.radius
+								1
 							]
 					}
 				}
 			}
-			console.log(angular.toJson($scope.data));
-			console.log(AuthService.currentUserId)
 		}
 		
-		leafletData.getMap().then(calculateRadius).then(createData4POST);
 		
+		//recupération des issues dans le périmètre de l'utilisateur
+		function getIssuesFromLocation()
+		{
+			$http({
+				method: 'POST',
+				url: apiUrl + '/issues/search',
+				data: $scope.data
+			}).success(addIssues2MapMarkers)
+		}
+		
+		function addIssues2MapMarkers(issues)
+		{
+			angular.forEach(issues, function(issue, index){
+				
+			
+				$scope.mapMarkers.push({
+					color: "#FF0000",
+					lat: issue.lat,
+					lng: issue.lng,
+					message: "<p>{{ issue.description }}</p><img src=\"{{ issue.imageUrl }}\" width=\"200px\" />",
+					getMessageScope: function() {
+						var scope = $scope.$new();
+						scope.issue = issue;
+						return scope;
+					}
+				});
+					
+			});
+		}
 		
 	
-		//recupération des issues dans le périmètre de l'utilisateur
-		/*
-		$http({
-			method: 'POST',
-			url: apiUrl + '/issues/search',
-			data: $scope.data
-		  }).success(function(issues) {
-			console.log(issues);
-		  });
-	*/
+		
+	
+		leafletData.getMap().then(calculateRadius).then(createData4POST).then(getIssuesFromLocation);
+		
 	
 
 	}, function(error) {
 		$log.error("Could not get location: " + error);
+	}).then(function(){
+			$scope.$on('leafletDirectiveMap.zoomend', function(event){
+				console.log("zoom fini");
+    });
 	});
 	
-
 })
