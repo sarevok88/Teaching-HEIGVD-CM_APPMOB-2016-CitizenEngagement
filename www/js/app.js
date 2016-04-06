@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.issuesMap','citizen-engagement.newIssueCtrl', 'citizen-engagement.issueDetails'])
+angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citizen-engagement.constants', 'citizen-engagement.issuesMap','citizen-engagement.newIssueCtrl', 'citizen-engagement.issueDetails', 'citizen-engagement.issuesList'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -69,6 +69,7 @@ angular.module('citizen-engagement', ['ionic', 'citizen-engagement.auth', 'citiz
       url: '/issueList',
       views: {
         'tab-issueList': {
+          controller: 'issuesListController',
           templateUrl: 'templates/issueList.html'
         }
       }
