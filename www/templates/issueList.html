@@ -1,5 +1,20 @@
-<ion-view view-title="Issue List">
-  <ion-content>
-    <p>Hello! This is the issue list screen.</p>
-  </ion-content>
+<ion-view view-title="Issues List">
+    <ion-nav-buttons side="secondary">
+        <button type="button" ng-controller="LogoutCtrl" ng-click="logOut()" class="button">Log Out</button>
+    </ion-nav-buttons>
+    <ion-content>
+        <form action="">
+            <div id='issuesListContainer' ng-controller="issuesListController">
+
+                <div class='issueListBlock' ng-repeat='issue in issues' value="{{issue.id}}">
+                    <!--option générée sur la base de l'API-->
+                    <img src="{{issue.imageUrl}}" alt="issue Photo" height="150" width="150">
+                    <p>{{issue.issueType.name}}</p>
+                    <p>{{issue.issueType.description}}</p>
+                    <p>{{issue.state}}</p>
+                </div>
+
+            </div>
+        </form> 
+    </ion-content>
 </ion-view>
