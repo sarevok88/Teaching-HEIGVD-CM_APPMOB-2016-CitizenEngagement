@@ -1,4 +1,4 @@
-angular.module("citizen-engagement.issuesMap", ['angular-storage', "geolocation","leaflet-directive"])
+angular.module("citizen-engagement.issuesMap", ['angular-storage'])
 
 .controller("issuesMapController", function($log, $scope, geolocation, mapboxMapId, mapboxAccessToken, AuthService) {
 	
@@ -35,6 +35,7 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', "geolocation"
 			
 		});
 	
+
 	}, function(error) {
 		$log.error("Could not get location: " + error);
 	});

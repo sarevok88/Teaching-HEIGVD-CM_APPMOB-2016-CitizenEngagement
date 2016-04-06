@@ -1,4 +1,4 @@
-angular.module('citizen-engagement.citizenCtrl', [])
+angular.module('citizen-engagement.newIssueCtrl', [])
 
         .controller('IssueTypesListCtrl',
                 function ($scope, $http, apiUrl) {
