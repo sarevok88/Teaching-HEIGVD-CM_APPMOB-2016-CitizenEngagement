@@ -4,14 +4,15 @@
     </ion-nav-buttons>
     <ion-content>
         <form action="">
-            <div id='newIssueContainer' ng-controller="issuesListController">
+            <div id='issuesListContainer' ng-controller="issuesListController">
 
-                <select>
-                    <!--default value-->
-                    <option selected disabled>Choose here</option>
+                <div class='issueListBlock' ng-repeat='issue in issues' value="{{issue.id}}">
                     <!--option générée sur la base de l'API-->
-                    <option ng-repeat='issueType in issueTypes' value="{{issueType.id}}">{{issueType.name}}</option>
-                </select><br>
+                    <img src="{{issue.imageUrl}}" alt="issue Photo" height="150" width="150">
+                    <p>{{issue.issueType.name}}</p>
+                    <p>{{issue.issueType.description}}</p>
+                    <p>{{issue.state}}</p>
+                </div>
 
             </div>
         </form> 

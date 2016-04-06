@@ -13,7 +13,7 @@ angular.module('citizen-engagement.issuesList', [])
 			    console.log(issues[index].issueType.name);
                             console.log(issues[index].issueType.description);
                             console.log(issues[index].state);
-			    $scope.currentIssue = issue[index].name;
+			    $scope.currentIssue = issues[index].name;
 			    index++;
 			}
 
