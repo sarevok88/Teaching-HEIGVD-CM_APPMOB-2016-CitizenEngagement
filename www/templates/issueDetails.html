@@ -1,7 +1,9 @@
 <ion-view view-title="issueDetails">
     <ion-content>
         <div ng-controller='issueDetailsController'>
-
+                <div ng-if="mapEnabled" style="height: 100%">
+                    <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
+                </div>
 
             <div>
                 <!--option générée sur la base de l'API-->
@@ -21,10 +23,7 @@
                     <p class="issueCommentDate">{{"Posted on : " +comment.postedOn.substring(0,10)}}</p>
                     <p>{{comment.text}}</p>
                 </ion-item>
-                <br>
-                <div ng-if="mapEnabled" style="height: 100%">
-                    <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
-                </div>
+   
 
             </div>
         </div>

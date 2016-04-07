@@ -7,7 +7,7 @@ angular.module('citizen-engagement.issueDetails', [])
             $scope.mapCenter = {};
             $scope.mapDefaults = {};
             $scope.mapMarkers = [];
-            $scope.userCoords = {};
+            $scope.issueCoords = {};
             $scope.data = {};
             $scope.mapEnabled = false;
 
@@ -25,32 +25,35 @@ angular.module('citizen-engagement.issueDetails', [])
                         index++;
                     }
 
-
+                    //Map  control
                     $scope.mapCenter.lat = issueCurrent.lat;
                     $scope.mapCenter.lng = issueCurrent.lng;
+                    //console.log($scope.mapCenter.lat);
+                    //console.log($scope.mapCenter.lng);
                     $scope.mapCenter.zoom = 14;
                     $scope.mapEnabled = true;
 
                     var mapboxTileLayer = "http://api.tiles.mapbox.com/v4/" + mapboxMapId;
-
+                    //console.log(mapboxTileLayer);
                     mapboxTileLayer = mapboxTileLayer + "/{z}/{x}/{y}.png?access_token=" + mapboxAccessToken;
+                    //console.log(mapboxTileLayer);
 
                     $scope.mapDefaults = {
                         tileLayer: mapboxTileLayer,
                         events: {
                             map: {
-                                enable: ['zoomend', 'drag', 'click'],
+                                enable: ['zoomend', 'drag', 'click']
                             }
                         }
                     };
                     
                 //ajout du pin du user
-		$scope.userCoords.lat = $scope.mapCenter.lat;
-		$scope.userCoords.lng = $scope.mapCenter.lng;
+		$scope.issueCoords.lat = $scope.mapCenter.lat;
+		$scope.issueCoords.lng = $scope.mapCenter.lng;
 		
 		$scope.mapMarkers.push({
-			lat: $scope.userCoords.lat,
-			lng: $scope.userCoords.lng
+			lat: $scope.issueCoords.lat,
+			lng: $scope.issueCoords.lng
 			
 		});
 
@@ -61,6 +64,6 @@ angular.module('citizen-engagement.issueDetails', [])
             $scope.loadCurrentIssue();
         }
 
-        )
+        );
 
 //Dans app.js ->  .state('tab.issueDetails' -> 'tab-issueList': { devient 'tab-issuesMap': {
