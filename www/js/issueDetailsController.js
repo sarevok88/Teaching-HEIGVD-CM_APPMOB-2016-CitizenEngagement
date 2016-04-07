@@ -29,8 +29,8 @@ angular.module('citizen-engagement.issueDetails', [])
                     //recupération de la localisation de l'utilisateur 
                     geolocation.getLocation().then(function (data) {
 
-                        $scope.mapCenter.lat = data.coords.latitude;
-                        $scope.mapCenter.lng = data.coords.longitude;
+                        $scope.mapCenter.lat = issueCurrent.lat;
+                        $scope.mapCenter.lng = issueCurrent.lng;
                         $scope.mapCenter.zoom = 14;
                         $scope.mapEnabled = true;
 
@@ -56,42 +56,8 @@ angular.module('citizen-engagement.issueDetails', [])
                             lng: $scope.userCoords.lng,
                         });
 
-                        function calculateRadius(map) {
-
-                            var mapBounds = map.getBounds();
-                            var x1 = mapBounds._northEast.lat;
-                            var y1 = mapBounds._northEast.lng;
-                            var x0 = $scope.mapCenter.lat;
-                            var y0 = $scope.mapCenter.lng;
-
-                            //on a besoin du rayon de la sphère en radian (d'après mongoDB $centerSphere)
-                            $scope.radius = mapBounds._northEast.distanceTo($scope.mapCenter) / 6135;
-                        }
-
-                        function createData4POST()
-                        {
-                            $scope.data = {
-                                "loc": {
-                                    "$geoWithin": {
-                                        "$centerSphere": [
-                                            [$scope.mapCenter.lat, $scope.mapCenter.lng],
-                                            1
-                                        ]
-                                    }
-                                }
-                            }
-                        }
 
 
-                        //recupération des issues dans le périmètre de l'utilisateur
-                        function getIssuesFromLocation()
-                        {
-                            $http({
-                                method: 'POST',
-                                url: apiUrl + '/issues/search',
-                                data: $scope.data
-                            }).success(addIssues2MapMarkers)
-                        }
 
                         function addIssues2MapMarkers(issues)
                         {
@@ -116,7 +82,7 @@ angular.module('citizen-engagement.issueDetails', [])
 
 
 
-                        leafletData.getMap().then(calculateRadius).then(createData4POST).then(getIssuesFromLocation);
+                        leafletData.getMap()
 
 
 
