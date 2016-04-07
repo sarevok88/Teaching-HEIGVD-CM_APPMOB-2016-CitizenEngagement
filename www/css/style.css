@@ -47,3 +47,11 @@ img.issueListBlockImg {
 .center button{
     margin: 20px auto;
 }
+
+.issueDetailsInfo {
+    padding-top: 22%;
+}
+
+.issueDetailMap {
+    margin-bottom: 10px;
+}
