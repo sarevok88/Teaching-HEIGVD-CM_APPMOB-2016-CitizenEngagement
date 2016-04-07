@@ -65,6 +65,9 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 					case "bsl":
 						icon = "eye-slash";
 						break;
+					case "dcr":
+						icon = "map-signs";
+						break;
 					default:
 						
 				}
@@ -113,13 +116,13 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 			$scope.mapMarkers.length =0;
 		}
 		
-		$scope.$on('leafletDirectiveMap.zoomend', function(event){
+		function refresh(event){
 			leafletData.getMap().then(createData4POST).then(getIssuesFromLocation);
-		});
-		$scope.$on('leafletDirectiveMap.moveend', function(event){
-			leafletData.getMap().then(createData4POST).then(getIssuesFromLocation);
-		});
+		}
 		
+		$scope.$on('leafletDirectiveMap.zoomend', refresh);
+		$scope.$on('leafletDirectiveMap.moveend', refresh);
+	
    
 	//recupération de la localisation de l'utilisateur 
 	geolocation.getLocation().then(function(data) {
