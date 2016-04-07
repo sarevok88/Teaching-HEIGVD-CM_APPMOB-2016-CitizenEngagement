@@ -1,31 +1,35 @@
 <ion-view view-title="issueDetails">
     <ion-content>
         <div ng-controller='issueDetailsController'>
-                <div ng-if="mapEnabled" style="height: 100%">
-                    <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
+
+            <ion-content scroll=false>
+                <div ng-if="mapEnabled" style="height: 55%">
+                    <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="55%" data-tap-disabled="true"></leaflet>
                 </div>
+            </ion-content>
+            
+                <div class="issueDetailsInfo">
+                    <!--option générée sur la base de l'API-->
+                    <img class='issueListBlockImg' src="{{issueCurrent.imageUrl}}" alt="issue Photo" height="150" width="150">
+                    <div class='issueListBlockInfo'>
+                        <h3>{{issueCurrent.issueType.name}}</h3>
+                        <p>{{issueCurrent.issueType.description}}</p>
+                        <p>{{"by " + issueCurrent.owner.name}}</p>
+                        <p>{{"State : " +issueCurrent.state}}</p>
+                        <p>{{"Latitude : " +issueCurrent.lat}}{{", Longitude : " +issueCurrent.lng}}</p>
+                    </div>
+                    <br>
+            
+                    <h2>Comments</h2>
+                    <ion-item ng-repeat="comment in issueCurrent.comments">
+                        <span>{{comment.author.name}}</span>
+                        <p class="issueCommentDate">{{"Posted on : " +comment.postedOn.substring(0,10)}}</p>
+                        <p>{{comment.text}}</p>
+                    </ion-item>
 
-            <div>
-                <!--option générée sur la base de l'API-->
-                <img class='issueListBlockImg' src="{{issueCurrent.imageUrl}}" alt="issue Photo" height="150" width="150">
-                <div class='issueListBlockInfo'>
-                    <h3>{{issueCurrent.issueType.name}}</h3>
-                    <p>{{issueCurrent.issueType.description}}</p>
-                    <p>{{"by " + issueCurrent.owner.name}}</p>
-                    <p>{{"State : " +issueCurrent.state}}</p>
-                    <p>{{"Latitude : " +issueCurrent.lat}}{{", Longitude : " +issueCurrent.lng}}</p>
+
                 </div>
-                <br>
-                <h2>Comments</h2>
-
-                <ion-item ng-repeat="comment in issueCurrent.comments">
-                    <span>{{comment.author.name}}</span>
-                    <p class="issueCommentDate">{{"Posted on : " +comment.postedOn.substring(0,10)}}</p>
-                    <p>{{comment.text}}</p>
-                </ion-item>
-   
-
-            </div>
+              
         </div>
 
     </ion-content>
