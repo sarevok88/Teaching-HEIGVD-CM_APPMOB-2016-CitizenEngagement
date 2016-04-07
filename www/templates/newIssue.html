@@ -11,12 +11,10 @@
 
         <!--formulaire transmettant les data à l'api-->
         <form action="">
+            <div class="center" id="urlIssueContainer" ng-controller="takePicture">
+                <input type="text" name="imageUrl" ng-model="imageUrl">
+            </div>
             <div id='newIssueContainer' ng-controller="IssueTypesListCtrl">
-                
-                <!--bouton appelant de la datat (démo)//////////////////////////////////////////////////////////////////////////////////-->
-                <!--<button type="button" ng-click="loadIssueTypes()" class="button">Yunia</button>-->
-                <!--bouton appelant de la datat (démo)//////////////////////////////////////////////////////////////////////////////////-->
-                
                 <!--Choix du type de l'issue-->
                 <p>What kind of issue are your facing?</p>
                 <!--Issue type form-->
@@ -39,5 +37,12 @@
 
             </div>
         </form> 
+        <p ng-if="imageData">Picture taken ({{ imageData.length | number }} bytes)</p>
+        <p ng-if="imageData"><img ng-src="data:image/png;base64,{{ imageData }}" width="100%" /></p>
+        
+        <div id="takePictureContainer" ng-controller="takePicture" padding="true">
+            <p class="center"><button class="button button-positive" ng-click="takePicture()">Take picture</button></p>
+        </div>
+
     </ion-content>
 </ion-view>
