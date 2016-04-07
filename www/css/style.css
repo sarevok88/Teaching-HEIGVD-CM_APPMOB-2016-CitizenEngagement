@@ -39,3 +39,11 @@ img.issueListBlockImg {
     padding: 20px;
     overflow: hidden;
 }
+.center{
+    text-align: center;
+    padding: 20px;
+}
+
+.center button{
+    margin: 20px auto;
+}
