@@ -17,7 +17,7 @@
                 
                 <ion-item ng-repeat="comment in issueCurrent.comments">
                     <span>{{comment.author.name}}</span>
-                    <p class="issueCommentDate">{{comment.postedOn}}</p>
+                    <p class="issueCommentDate">{{"Posted on : " +comment.postedOn.substring(0,10)}}</p>
                     <p>{{comment.text}}</p>
                 </ion-item>
                 
