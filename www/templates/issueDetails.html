@@ -3,7 +3,7 @@
         <div ng-controller='issueDetailsController'>
 
             <ion-content scroll=false>
-                <div ng-if="mapEnabled" style="height: 50%">
+                <div class="issueDetailMap" ng-if="mapEnabled" style="height: 50%">
                     <leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="50%" data-tap-disabled="true"></leaflet>
                 </div>
             </ion-content>

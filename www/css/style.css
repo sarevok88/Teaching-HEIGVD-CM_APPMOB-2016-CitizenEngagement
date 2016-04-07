@@ -49,6 +49,9 @@ img.issueListBlockImg {
 }
 
 .issueDetailsInfo {
-    PADDING-TOP: 25%;
+    padding-top: 22%;
 }
 
+.issueDetailMap {
+    margin-bottom: 10px;
+}
