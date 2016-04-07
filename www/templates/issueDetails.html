@@ -1,10 +1,27 @@
 <ion-view view-title="issueDetails">
     <ion-content>
-        <div ng-controller='issueDetailsController'></div>
-                    <div class='issueListBlockInfo'>
+        <div ng-controller='issueDetailsController'>
+
+
+            <div>
+                <!--option générée sur la base de l'API-->
+                <img class='issueListBlockImg' src="{{issueCurrent.imageUrl}}" alt="issue Photo" height="150" width="150">
+                <div class='issueListBlockInfo'>
                     <h3>{{issueCurrent.issueType.name}}</h3>
-                    <p>{{issue.issueType.description}}</p>
-                    <p>{{issue.state}}</p>
-                    </div>
+                    <p>{{issueCurrent.issueType.description}}</p>
+                    <p>{{"by " + issueCurrent.owner.name}}</p>
+                    <p>{{"State : " +issueCurrent.state}}</p>
+                </div>
+                <h2>Comments</h2>
+                
+                <ion-item ng-repeat="comment in issueCurrent.comments">
+                    <span>{{comment.author.name}}</span>
+                    <p class="issueCommentDate">{{comment.postedOn}}</p>
+                    <p>{{comment.text}}</p>
+                </ion-item>
+                
+            </div>
+        </div>
+
     </ion-content>
 </ion-view>
