@@ -1,6 +1,9 @@
 angular.module('citizen-engagement.newIssueCtrl', [])
 
 .controller('addIssue', function($scope, $ionicLoading, $state, $http, apiUrl) {
+
+    $scope.issue = {};
+
     console.log('On est dans le addIssue controller');
  $scope.register = function() {
     console.log('On est dans le scope register');
@@ -22,7 +25,7 @@ angular.module('citizen-engagement.newIssueCtrl', [])
         console.log('C est un succès !');
         //test affichage id issue
         $scope.issues = issue;
-        
+
         console.log(issue.id);
         
         // Hide the loading message.
@@ -85,7 +88,7 @@ angular.module('citizen-engagement.newIssueCtrl', [])
                     }
                 }).success(function(data) {
                     $scope.imageData = data;
-                    $scope.imageUrl = data.url;
+                    $scope.issue.imageUrl = data.url;
                 });
             });
         };
