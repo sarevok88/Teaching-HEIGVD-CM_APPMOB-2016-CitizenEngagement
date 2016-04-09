@@ -1,7 +1,49 @@
 angular.module('citizen-engagement.newIssueCtrl', [])
 
-.controller('IssueTypesListCtrl',
-    function ($scope, $http, apiUrl) {
+.controller('addIssue', function($scope, $ionicLoading, $state, $http, apiUrl) {
+
+    $scope.issue = {};
+
+    console.log('On est dans le addIssue controller');
+ $scope.register = function() {
+    console.log('On est dans le scope register');
+      // Forget the previous error (if any).
+      delete $scope.error;
+
+      // Show a loading message if the request takes too long.
+      $ionicLoading.show({
+        template: 'Adding issue...',
+        delay: 750
+      });
+
+      // Make the request to retrieve or create the issue.
+      $http({
+        method: 'POST',
+        url: apiUrl + '/issues/',
+        data: $scope.issue
+      }).success(function(issue) {
+        console.log('C est un succès !');
+        //test affichage id issue
+        $scope.issues = issue;
+
+        console.log(issue.id);
+        
+        // Hide the loading message.
+        $ionicLoading.hide();
+
+        // Go to the issue creation tab.
+        $state.go('tab.issueList');
+
+      }).error(function() {
+        console.log('bon....ça ne marche pas');
+        // If an error occurs, hide the loading message and show an error message.
+        $ionicLoading.hide();
+        $scope.error = 'Could upload the issue';
+      });
+    };
+})
+
+.controller('IssueTypesListCtrl', function ($scope, $http, apiUrl) {
         $scope.loadIssueTypes = function () {
             $http.get(apiUrl + '/issueTypes').success(function (issueTypes) {
                 $scope.issueTypes = issueTypes;
@@ -46,7 +88,7 @@ angular.module('citizen-engagement.newIssueCtrl', [])
                     }
                 }).success(function(data) {
                     $scope.imageData = data;
-                    $scope.imageUrl = data.url;
+                    $scope.issue.imageUrl = data.url;
                 });
             });
         };

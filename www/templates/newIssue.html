@@ -11,34 +11,29 @@
 
         <!--formulaire transmettant les data à l'api-->
         <form action="">
-            <div class="center" id="urlIssueContainer" ng-controller="takePicture">
-                <input type="text" name="imageUrl" ng-model="imageUrl">
+            <div class="center" id="urlIssueContainer">
+                <input type="text" name="imageUrl" ng-model="issue.imageUrl">
             </div>
+            <!-- Ionic uses lists to group related input elements. -->
+            <label class="item item-input">
+              <!-- Note the required="required" attribute used for validation. -->
+              <input type="text" placeholder="Description" ng-model="issue.description"/>
+            </label>
             <div id='newIssueContainer' ng-controller="IssueTypesListCtrl">
                 <!--Choix du type de l'issue-->
                 <p>What kind of issue are your facing?</p>
                 <!--Issue type form-->
-                <select>
+                <select ng-model="issue.issueTypeId">
                     <!--default value-->
                     <option selected disabled>Choose here</option>
                     <!--option générée sur la base de l'API-->
                     <option ng-repeat='issueType in issueTypes' value="{{issueType.id}}">{{issueType.name}}</option>
                 </select><br>
 
-                <!--description de l'issue-->
-                Description<br>
-                <input type="text" name="description"><br>
-                
-                <!---->
-                <br>
-                <input type="submit" value="Submit">
-
-
-
+                <button class="button button-full button-positive" ng-click="register()" ng-disabled="loginForm.$invalid">Add issue</button>
             </div>
         </form> 
-        <p ng-if="imageData">Picture taken ({{ imageData.length | number }} bytes)</p>
-        <p ng-if="imageData"><img ng-src="data:image/png;base64,{{ imageData }}" width="100%" /></p>
+        <p ng-if="issue.imageUrl"><img ng-src="{{ issue.imageUrl }}" width="100%" /></p>
         
         <div id="takePictureContainer" ng-controller="takePicture" padding="true">
             <p class="center"><button class="button button-positive" ng-click="takePicture()">Take picture</button></p>
