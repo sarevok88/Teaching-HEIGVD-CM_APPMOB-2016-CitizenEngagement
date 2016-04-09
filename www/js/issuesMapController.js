@@ -11,8 +11,11 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 	  $scope.radius = {};
 	  $scope.mapEnabled = false;
 	  $scope.mapBounds;
+	  $scope.filters = [];
+	  $scope.status = [{"name": "in_progress"}, {"name": "assigned"}, {"name": "acknowledged"}, {"name": "created"}, {"name": "solved"}];
 	  var userPos;
 	  
+	  getIssueTypes();
 	 
 		
 		function createData4POST(map)
@@ -35,6 +38,27 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 				}
 			}
 		}
+		
+		function getIssueTypes()
+		{
+			$http({
+				method: 'GET',
+				headers: {"x-pagination": "0;100","x-sort":  "-createdOn"},
+				url: apiUrl + '/issueTypes',
+			}).success(createFiltersList)
+		}
+		
+		function createFiltersList(issueTypes)
+		{
+			$scope.issueTypes = issueTypes;
+		}
+		
+		$scope.refreshIssuesByFilters = function refreshIssuesByFilters()
+		{
+			//afficher les markers selon les filtres
+			/* $scope.filters = checked-boxes mais ça me soule de continuer juste là a chercher lolilol */
+		}
+		
 		
 		
 		//recupération des issues dans le périmètre de l'utilisateur
@@ -154,7 +178,8 @@ angular.module("citizen-engagement.issuesMap", ['angular-storage', 'leaflet-dire
 			lng: $scope.userCoords.lng,
 		}
 		$scope.mapMarkers.push(userPos);
-
+		
+		
 	}, function(error) {
 		$log.error("Could not get location: " + error);
 	})

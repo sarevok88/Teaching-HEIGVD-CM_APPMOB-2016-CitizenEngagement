@@ -1,7 +1,25 @@
 <ion-view view-title="Issue Map">
-  <ion-content scroll=false>
-	<div ng-if="mapEnabled" style="height: 100%">
+  <ion-content>
+	<div ng-if="mapEnabled" style="height: 50%">
 		<leaflet defaults="mapDefaults" center="mapCenter" markers="mapMarkers" height="100%" data-tap-disabled="true"></leaflet>
+		
 	</div>
+	
+	<div style="height: 20%"><p>Types d'issues: </p>
+	
+	  <label ng-repeat="issueType in issueTypes" value="{{issueType.name}}">
+		<input ng-click="refreshIssuesByFilters()" type="checkbox" value="{{issueType.name}}"> {{issueType.name}} <br/>
+	  </label>
+	
+	</div>
+	
+	<div style="height: 20%"><p>Status des issues: </p>
+	
+	  <label ng-repeat="stat in status" value="{{stat.name}}">
+		<input ng-click="refreshIssuesByFilters()" type="checkbox" value="{{stat.name}}"> {{stat.name}} <br/>
+	  </label>
+	
+	</div>
+	
   </ion-content>
 </ion-view>
