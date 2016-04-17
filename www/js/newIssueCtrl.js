@@ -32,7 +32,7 @@ angular.module('citizen-engagement.newIssueCtrl', [])
         $ionicLoading.hide();
 
         // Go to the issue creation tab.
-        $state.go('tab.issueList');
+        //$state.go('tab.issueList');
 
       }).error(function() {
         console.log('bon....ça ne marche pas');
@@ -47,21 +47,15 @@ angular.module('citizen-engagement.newIssueCtrl', [])
         $scope.loadIssueTypes = function () {
             $http.get(apiUrl + '/issueTypes').success(function (issueTypes) {
                 $scope.issueTypes = issueTypes;
-                console.log(issueTypes);
 
                 index = 0;
 
                 while (index < issueTypes.length)
                 {
-                    console.log(issueTypes[index].name);
+                    //console.log(issueTypes[index].name);
                     $scope.currentIssueType = issueTypes[index].name;
                     index++;
                 }
-                
-                console.log("test injection map");
-                
-                
-                console.log("Fin code test injection map");
             });
         };
     $scope.loadIssueTypes();
