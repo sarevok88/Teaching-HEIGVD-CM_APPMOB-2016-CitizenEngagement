@@ -6,19 +6,23 @@
 	</div>
 	
 	<div style="height: 20%"><p>Types d'issues: </p>
-	
-	  <label ng-repeat="issueType in issueTypes" value="{{issueType.name}}">
-		<input ng-click="refreshIssuesByFilters()" type="checkbox" value="{{issueType.name}}"> {{issueType.name}} <br/>
-	  </label>
-	
+		<ul>
+		  <li ng-repeat="issueType in issueTypes">
+			  <label>
+				<input ng-init="filters[issueType.name]=true" ng-model="filters[issueType.name]" ng-click="refreshIssuesByFilters()" type="checkbox" value="{{issueType.name}}"> {{issueType.name}} <br/>
+			  </label>
+		  </li>
+		</ul>
 	</div>
 	
 	<div style="height: 20%"><p>Status des issues: </p>
-	
-	  <label ng-repeat="stat in status" value="{{stat.name}}">
-		<input ng-click="refreshIssuesByFilters()" type="checkbox" value="{{stat.name}}"> {{stat.name}} <br/>
-	  </label>
-	
+		<ul>
+		  <li ng-repeat="stat in status">
+			<label>
+				<input ng-init="filters[stat.name]=true" ng-model="filters[stat.name]" ng-click="refreshIssuesByFilters()" type="checkbox" value="{{stat.name}}"> {{stat.name}} <br/>
+			</label>
+		  </li>
+		</ul>
 	</div>
 	
   </ion-content>
